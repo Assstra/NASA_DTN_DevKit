@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<scenario name="/home/ion_core/NASA_DTN_DevKit/CORE_configs/base/base.xml">
+  <networks>
+    <network id="5" name="wlan5" type="WIRELESS_LAN">
+      <position x="546" y="279" lat="47.57663062355079" lon="-122.12496479782305" alt="2.0"/>
+    </network>
+  </networks>
+  <devices>
+    <device id="1" name="n1" type="router" class="" image="">
+      <position x="194" y="266" lat="47.57674879471599" lon="-122.12970790252321" alt="2.0"/>
+      <services>
+        <service name="zebra"/>
+        <service name="OSPFv2"/>
+        <service name="OSPFv3"/>
+      </services>
+    </device>
+    <device id="2" name="n2" type="router" class="" image="">
+      <position x="74" y="105" lat="47.57821227704232" lon="-122.13132487003463" alt="2.0"/>
+      <services>
+        <service name="zebra"/>
+        <service name="OSPFv2"/>
+        <service name="OSPFv3"/>
+      </services>
+    </device>
+    <device id="3" name="n3" type="mdr" class="" image="">
+      <position x="360" y="162" lat="47.577694154436486" lon="-122.12747109746574" alt="2.0"/>
+      <services>
+        <service name="zebra"/>
+        <service name="OSPFv3MDR"/>
+      </services>
+    </device>
+    <device id="4" name="n4" type="mdr" class="" image="">
+      <position x="541" y="130" lat="47.5779850309166" lon="-122.12503217146936" alt="2.0"/>
+      <services>
+        <service name="zebra"/>
+        <service name="OSPFv3MDR"/>
+      </services>
+    </device>
+  </devices>
+  <links>
+    <link node1="5" node2="4">
+      <iface2 id="0" name="eth0" mac="00:00:00:aa:00:18" ip4="10.3.3.1" ip4_mask="24" ip6="2001:3::1" ip6_mask="128"/>
+    </link>
+    <link node1="5" node2="3">
+      <iface2 id="2" name="eth2" mac="00:00:00:aa:00:19" ip4="10.3.3.2" ip4_mask="24" ip6="2001:3::2" ip6_mask="128"/>
+    </link>
+    <link node1="1" node2="2">
+      <iface1 id="0" name="eth0" mac="00:00:00:aa:00:14" ip4="10.0.0.1" ip4_mask="24" ip6="2001::1" ip6_mask="64"/>
+      <iface2 id="0" name="eth0" mac="00:00:00:aa:00:15" ip4="10.0.0.2" ip4_mask="24" ip6="2001::2" ip6_mask="64"/>
+      <options delay="0" bandwidth="0" loss="0.0" dup="0" jitter="0" unidirectional="0"/>
+    </link>
+    <link node1="1" node2="3">
+      <iface1 id="1" name="eth1" mac="00:00:00:aa:00:16" ip4="10.0.2.1" ip4_mask="24" ip6="2001:2::1" ip6_mask="64"/>
+      <iface2 id="1" name="eth1" mac="00:00:00:aa:00:17" ip4="10.0.2.2" ip4_mask="24" ip6="2001:2::2" ip6_mask="64"/>
+      <options delay="0" bandwidth="0" loss="0.0" dup="0" jitter="0" unidirectional="0"/>
+    </link>
+  </links>
+  <mobility_configurations>
+    <mobility_configuration node="5" model="basic_range">
+      <configuration name="range" value="250"/>
+      <configuration name="bandwidth" value="100000"/>
+      <configuration name="jitter" value="0"/>
+      <configuration name="delay" value="20000"/>
+      <configuration name="error" value="3"/>
+      <configuration name="promiscuous" value="0"/>
+    </mobility_configuration>
+    <mobility_configuration node="5" model="ns2script">
+      <configuration name="file" value="/home/core/.core/configs/NASADTNDevKit/base/30-30.scen"/>
+      <configuration name="refresh_ms" value="50"/>
+      <configuration name="loop" value="1"/>
+      <configuration name="autostart" value="0.0"/>
+      <configuration name="map" value=""/>
+      <configuration name="script_start" value="/home/core/.core/configs/NASADTNDevKit/common/mobility.sh"/>
+      <configuration name="script_pause" value=""/>
+      <configuration name="script_stop" value=""/>
+      <configuration name="#file" value="~/.core/configs/NASADTNDevKit/base/30-30.scen"/>
+      <configuration name="#script_start" value="~/.core/configs/common/NASADTNDEVKit/mobility.sh"/>
+    </mobility_configuration>
+  </mobility_configurations>
+  <service_configurations>
+    <service name="UserDefined" node="1">
+      <directories>
+        <directory>/var/ion</directory>
+      </directories>
+      <startups>
+        <startup>sh ./setup.sh</startup>
+      </startups>
+      <files>
+        <file name="setup.sh"><![CDATA[foo=`dirname $SESSION_FILENAME`
+sh $foo/generalSetup.sh]]></file>
+      </files>
+    </service>
+    <service name="UserDefined" node="2">
+      <directories>
+        <directory>/var/ion</directory>
+      </directories>
+      <startups>
+        <startup>sh ./setup.sh</startup>
+      </startups>
+      <files>
+        <file name="setup.sh"><![CDATA[foo=`dirname $SESSION_FILENAME`
+sh $foo/generalSetup.sh]]></file>
+      </files>
+    </service>
+    <service name="UserDefined" node="3">
+      <directories>
+        <directory>/var/ion</directory>
+      </directories>
+      <startups>
+        <startup>sh ./setup.sh</startup>
+      </startups>
+      <files>
+        <file name="setup.sh"><![CDATA[foo=`dirname $SESSION_FILENAME`
+sh $foo/generalSetup.sh]]></file>
+      </files>
+    </service>
+    <service name="UserDefined" node="4">
+      <directories>
+        <directory>/var/ion</directory>
+      </directories>
+      <startups>
+        <startup>sh ./setup.sh</startup>
+      </startups>
+      <files>
+        <file name="setup.sh"><![CDATA[foo=`dirname $SESSION_FILENAME`
+sh $foo/generalSetup.sh]]></file>
+      </files>
+    </service>
+  </service_configurations>
+  <session_origin lat="47.5791667" lon="-122.132322" alt="2.0" scale="150.0"/>
+  <session_hooks>
+    <hook name="instantiation_hook.sh" state="3">#!/bin/sh
+# session hook script; write commands here to execute on the host at the
+# specified state
+rm -f /tmp/ionrcdate
+
+
+
+
+
+
+
+
+
+
+</hook>
+    <hook name="runtime_hook.sh" state="4">#!/bin/bash
+# session hook script; write commands here to execute on the host at the
+# specified state
+
+pycore=`ls /tmp | grep pycore`
+sleep 15 &amp;&amp; xterm -e "/usr/local/sbin/vcmd -c /tmp/$pycore/n2 -- bping ipn:2.2 ipn:4.1" &amp;
+
+</hook>
+    <hook name="shutdown_hook.sh" state="6">#!/bin/sh
+# session hook script; write commands here to execute on the host at the
+# specified state
+
+killall -9 vcmd
+
+
+
+
+
+
+
+
+</hook>
+  </session_hooks>
+  <session_options>
+    <configuration name="controlnet" value="192.168.0.0/24"/>
+    <configuration name="controlnet0" value=""/>
+    <configuration name="controlnet1" value=""/>
+    <configuration name="controlnet2" value=""/>
+    <configuration name="controlnet3" value=""/>
+    <configuration name="controlnet_updown_script" value=""/>
+    <configuration name="enablerj45" value="1"/>
+    <configuration name="preservedir" value="0"/>
+    <configuration name="enablesdt" value="0"/>
+    <configuration name="sdturl" value="tcp://127.0.0.1:50000/"/>
+    <configuration name="ovs" value="0"/>
+    <configuration name="platform_id_start" value="1"/>
+    <configuration name="nem_id_start" value="1"/>
+    <configuration name="link_enabled" value="1"/>
+    <configuration name="loss_threshold" value="30"/>
+    <configuration name="link_interval" value="1"/>
+    <configuration name="link_timeout" value="4"/>
+    <configuration name="mtu" value="0"/>
+  </session_options>
+  <session_metadata>
+    <configuration name="annotation a1" value="{iconcoords {27.0 70.0}} {type text} {label {Ground Station}} {labelcolor black} {fontfamily {Arial}} {fontsize {12}} {canvas c1}"/>
+    <configuration name="annotation a2" value="{iconcoords {643.0 130.0}} {type text} {label {Satellite}} {labelcolor black} {fontfamily {Arial}} {fontsize {12}} {canvas c1}"/>
+    <configuration name="annotation a3" value="{iconcoords {126.0 328.0}} {type text} {label {BPI / LTP testing}} {labelcolor black} {fontfamily {Arial}} {fontsize {12}} {canvas c1}"/>
+    <configuration name="annotation a4" value="{type text} {iconcoords {315.0 87.0}} {label {}} {canvas c1}"/>
+    <configuration name="annotation a5" value="{iconcoords {199.0 36.0}} {type text} {label {Bping is set to run from node 4-&gt;2 automatically.}} {labelcolor black} {fontfamily {Arial}} {fontsize {12}} {canvas c1}"/>
+    <configuration name="annotation a6" value="{iconcoords {199.0 60.0}} {type text} {label {An Xterm will pop up after 15 seconds, and the ping will start just before the satellite goes out of range.}} {labelcolor black} {fontfamily {Arial}} {fontsize {12}} {canvas c1}"/>
+    <configuration name="annotation a7" value="{iconcoords {199.0 84.0}} {type text} {label {When it comes back, the ping will continue.}} {labelcolor black} {fontfamily {Arial}} {fontsize {12}} {canvas c1}"/>
+    <configuration name="canvas c1" value="{name {Canvas1}}"/>
+    <configuration name="global_options" value="interface_names=yes ip_addresses=yes ipv6_addresses=no node_labels=yes link_labels=yes show_api=no background_images=no annotations=yes grid=yes traffic_start=0"/>
+  </session_metadata>
+  <default_services>
+    <node type="mdr">
+      <service name="zebra"/>
+      <service name="OSPFv3MDR"/>
+      <service name="IPForward"/>
+    </node>
+    <node type="PC">
+      <service name="DefaultRoute"/>
+    </node>
+    <node type="prouter"/>
+    <node type="router">
+      <service name="zebra"/>
+      <service name="OSPFv2"/>
+      <service name="OSPFv3"/>
+      <service name="IPForward"/>
+    </node>
+    <node type="host">
+      <service name="DefaultRoute"/>
+      <service name="SSH"/>
+    </node>
+  </default_services>
+</scenario>
